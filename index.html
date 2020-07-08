@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link 
-    rel="stylesheet" 
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/flatly/bootstrap.min.css"
+        integrity="sha384-mhpbKVUOPCSocLzx2ElRISIORFRwr1ZbO9bAlowgM5kO7hnpRBe+brVj8NNPUiFs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <title>Weather Dashboard</title>
 </head>
-<body>
-    <header>
 
+<body>
+    <header class="bg-rich-blue text-white text-center p-2 mb-0">
+        <h1>Weather Dashboard</h1>
     </header>
 
-    <div class="container">
-        <div class="row">
-            <section id="sidebar" class = "col-md-3">
-                <!-- search bar and list for recently viewed cities -->
+    <div class="container m-0 min-vw-100">
+        <div class="row mt-1">
+
+            <!-- search field -->
+            <nav id="sidebar" class="flex-column  col-md-3 min-vh-100 mt-0 bg-lightblue">
+                <h4 class="mt-3 text-white">Search for City:</h4>
+                <div class="input-group input-group-lg">
+                    <input id="search-input" type="text" class="form-control mx-auto mt-2" placeholder="City"
+                        aria-label="search" aria-describedby="inputGroup-sizing-lg">
+
+                    <div class="input-group-prepend">
+                        <button class="input-group-text text-white rounded mx-auto mt-2 bg-med-blue" id="search">
+                            <i id="search-button" class="fas fa-search"></i>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="clearBtn">
+
+                    <button id="clear" class="text-white rounded mx-auto mt-2 bg-med-blue">Clear Entries</button>
+                </div>
+
+
+                <!-- list for recently viewed cities -->
+                <div id="recent-searches" class="row">
+
+                </div>
+
+            </nav>
+
+            <section id="display-information" class="col-md-9">
+                <div id="current-weather" class="">
+                    <!-- current weather -->
+                </div>
+
+                <div id="5day" class="container">
+
+
+                    <!-- cards for 5 day forecast -->
+
+
+                </div>
             </section>
 
-            <section id="display-information" class= "col-md-9">
-                <!-- information display -->
-
-                <!-- cards for 5 day forecast -->
-            </section>
+            <footer class="bg-primary"></footer>
 
 
         </div>
@@ -42,10 +72,12 @@
 
 
 
-    
 
-  <!-- JS scripts -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="assets/js/script.js"></script>   
+
+    <!-- JS scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
+
 </html>

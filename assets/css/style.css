@@ -1,0 +1,72 @@
+
+
+/* Color Theme Swatches in RGBA */
+.Copy-of-Living-Coral-plus-Blues-1-rgba { color: rgba(31, 77, 94, 1); }
+.Copy-of-Living-Coral-plus-Blues-2-rgba { color: rgba(121, 167, 168, 1); }
+.Copy-of-Living-Coral-plus-Blues-3-rgba { color: rgba(249, 114, 103, 1); }
+.Copy-of-Living-Coral-plus-Blues-4-rgba { color: rgba(182, 214, 216, 1); }
+.Copy-of-Living-Coral-plus-Blues-5-rgba { color: rgba(237, 246, 244, 1); }
+
+
+
+/* Color Theme Swatches in RGBA */
+.Morning-Storms- { color: rgba(26, 114, 191, 1); }
+.Morning-Storms--2 { color: rgba(51, 137, 191, 1); }
+.Morning-Storms--3 { color: rgba(125, 190, 216, 1); }
+.Morning-Storms-4 { color: rgba(242, 211, 118, 1); }
+.Morning-Storms---5 { color: rgba(242, 179, 101, 1); }
+
+
+
+.bg-coral {
+    background-color: rgba(249, 114, 103, .7);
+}
+
+.bg-lt-blue {
+    background-color: rgba(182, 214, 216, 1);
+}
+    
+.bg-md-blue {
+    background-color: rgba(121, 167, 168, 1);
+}
+
+.bg-rich-blue {
+    background-color: rgba(26, 114, 191, 1);
+}
+
+.bg-med-blue {
+    background-color: rgba(51, 137, 191, 1);
+}
+
+.bg-med-blue-7 {
+    background-color: rgba(51, 137, 191, .7);
+}
+
+.bg-lightblue {
+    background-color: rgba(125, 190, 216, 1);
+}
+
+.uv-low {
+    background-color: green;
+    background-clip: content-box;
+}
+
+.uv-md {
+    background-color:rgba(242, 211, 118, 1);
+    background-clip: content-box;
+}
+
+.uv-high {
+    background-color: orange;
+    background-clip: content-box;
+}
+
+.uv-v-high {
+    background-color: red;
+    background-clip: content-box;
+}
+
+.uv-ex-high {
+    background-color: rgb(104, 52, 104);
+}
+
