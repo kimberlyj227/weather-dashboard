@@ -1,6 +1,4 @@
-
 //* Variables
-
 var searches = [];
 var apiKey = "94b6202e8b8c7902f232bf135edcd567";
 
@@ -19,7 +17,6 @@ function renderSearches() {
         $("#recent-searches").prepend(search)
     }
 }
-
 // ** gets info from API and displays it current weather div
 function displayCurrentInfo() {
 
@@ -46,7 +43,6 @@ function displayCurrentInfo() {
     })
 
 }
-
 // ** gets UV info -- to be called in displayCurrentInfo
 function getUV(lat, lon) {
     var uvUrl = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
@@ -71,7 +67,6 @@ function getUV(lat, lon) {
 
     })
 }
-
 // ** gets 5 day forecast information
 function display5DayInfo() {
     var url5Day = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
@@ -108,32 +103,21 @@ function display5DayInfo() {
         }
     })
 }
-
 // ** clears current data so new data can load
 function clearData() {
     $("#current-weather").empty();
     $("#5day").empty();
 }
-
-function error() {
-    window.on("error", function() {
-        $("#current-weather").text("Please enter a valid city");
-    })
-}
-
 //* local storage
-
 function getSearches() {
     searches = JSON.parse(localStorage.getItem("city")) || [];
     renderSearches();
 }
-
 function saveSearches() {
 
 localStorage.setItem("city", JSON.stringify(searches));
 
 }
-
 function clearStorage() {
     localStorage.clear();
     $("#recent-searches").empty();
@@ -141,6 +125,7 @@ function clearStorage() {
     searches = [];
 }
 
+// * Call functions
 onLoad();
 
 // * Click Events
