@@ -33,9 +33,10 @@
 var searches = [];
 var apiKey = "94b6202e8b8c7902f232bf135edcd567";
 
-
-
 //* Functions
+function onLoad() {
+    getSearches();
+}
 // ** creates recent search buttons
 function renderSearches() {
     $("#recent-searches").empty();
@@ -53,8 +54,6 @@ function displayCurrentInfo() {
 
     var queryUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`
 
-
-    //ajax call
     $.ajax({
         url: queryUrl,
         method: "GET"
@@ -89,23 +88,24 @@ function getUV(lat, lon) {
         method: "GET"
     }).then(function (response) {
         var uv = response.value
-        $("#current-weather").append(`<p class ='uv' value='${uv}'>UV Index: ${uv} </p>`);
+        $("#current-weather").append(`<p class ='uv font-weight-bold' value='${uv}'>UV Index: ${uv} </p>`);
 
         if (uv < 2) {
             $(".uv").addClass("uv-low");
         } else if ((uv > 2) && (uv <5)) {
             $(".uv").addClass("uv-md");
-        } else if ((uv > 5) && (uv < 7)) {
+        } else if ((uv > 5) && (uv < 8)) {
             $(".uv").addClass("uv-high");
-        } else if ((uv > 7) && (uv < 11)) {
+        } else if ((uv > 8) && (uv < 11)) {
             $(".uv").addClass("uv-v-high");
         } else {
-            $(".uv").addClass("uv-ex-high text-white");
+            $(".uv").addClass("uv-ex-high");
         }
 
     })
 }
 
+// ** gets 5 day forecast information
 function display5DayInfo() {
     var url5Day = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
 
@@ -114,14 +114,14 @@ function display5DayInfo() {
         method: "GET"
     }).then(function (response) {
         var results = response.list;
-        console.log(response)
 
         $("#5day").append($("<h3 class='row'>5 Day Forecast:</h3>"))
         var wrapper = $("<div class='wrapper row'>");
 
         for (var i = 0; i < results.length; i++) {
             if (results[i].dt_txt.indexOf("15:00:00") !== -1) {
-            var forecastDiv = $("<div class='card text-white text-center bg-med-blue-7 mr-1 col-md-2 p-2'>");
+
+            var forecastDiv = $("<div class='card text-white text-center bg-med-blue-7 mr-3 mb-3 col-md-2 p-2'>");
              
             var date5 = $(`<div class='card-header' id='date5'> ${moment.unix(results[i].dt).format("M/D/YY")} </div>`);
 
@@ -142,44 +142,37 @@ function display5DayInfo() {
     })
 }
 
-//
-// function get5Day(response) {
-//     var results = response.list;
-//     console.log(response)
-
-//     $("#5day").append($("<h3 class='row'>5 Day Forecast:</h3>"))
-//     var wrapper = $("<div class='wrapper row'>");
-//     for (var i = 0; i < results.length; i++) {
-//         var forecastDiv = $("<div class='card text-white bg-med-blue-7 mr-1 col-md-2 p-2'>")
-//         var date5 = $(`<div class='card-header' id='date5'> ${moment.utc(results[i].dt[i]).format("M/D/YY")} </div>`);
-//         var icon5 = $(`<p id='date5'> ${results[i].weather.icon} </p>`)
-//         var temp5 = $(`<p id='temp5' class = 'card-text'> Temperature: ${results[i].main.temp}</p>`);
-//         var humidity5 = $(`<p id='humidity5' class = 'card-text'> Humidity: ${results[i].main.humidity}%</p>`);
-//         // console.log(temp5)
-
-//         // var cardInfo = $(`
-//         //                 
-//         //                 <p id='icon5'class='card-text'>${icon5}</p>`);
-
-//         forecastDiv.append(date5, icon5, temp5, humidity5);
-//         wrapper.append(forecastDiv)
-//         $("#5day").append(wrapper);
-
-//     }
-
-// }
-
 // ** clears current data so new data can load
 function clearData() {
     $("#current-weather").empty();
     $("#5day").empty();
 }
 
-//* Call Functions
+//* local storage
+
+function getSearches() {
+    searches = JSON.parse(localStorage.getItem("city")) || [];
+    renderSearches();
+}
+
+function saveSearches() {
+
+localStorage.setItem("city", JSON.stringify(searches));
+
+}
+
+function clearStorage() {
+    localStorage.clear();
+    $("#recent-searches").empty();
+    clearData();
+    searches = [];
+}
+
+onLoad();
 
 // * Click Events
 //search button
-$("#search-button").on("click", function (event) {
+$("#search").on("click", function (event) {
     event.preventDefault();
     city = $("#search-input").val().trim();
     clearData();
@@ -188,7 +181,7 @@ $("#search-button").on("click", function (event) {
     $("#search-input").val("");
     display5DayInfo();
     displayCurrentInfo();
-
+    saveSearches();
 })
 //recent search
 $(document).on("click", ".city", function () {
@@ -198,3 +191,6 @@ $(document).on("click", ".city", function () {
     display5DayInfo();
 
 });
+
+//clear button
+$("#clear").on("click", clearStorage);
