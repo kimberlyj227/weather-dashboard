@@ -10,11 +10,11 @@ function onLoad() {
 }
 // ** creates recent search buttons
 function renderSearches() {
+
     $("#recent-searches").empty();
 
     for (var i = 0; i < searches.length; i++) {
         var search = $(`<button class='city btn bg-med-blue btn-lg btn-block p-2 mx-auto mt-3 text-white' data-name='${searches[i]}'>${searches[i].toUpperCase()}</button>`);
-
 
         $("#recent-searches").prepend(search)
     }
@@ -35,19 +35,15 @@ function displayCurrentInfo() {
         var date = moment.unix(response.dt).format("M/D/YY");
         var iconCode = response.weather[0].icon;
         var iconImg = $("<img>");
-        iconImg.attr("src", "http://openweathermap.org/img/wn/" + iconCode + "@2x.png")
+        iconImg.attr("src", "https://openweathermap.org/img/wn/" + iconCode + "@2x.png")
 
         var temp = $(`<p>Temperature: ${response.main.temp} &degF</p>`);
         var humidity = $(`<p>Humidity: ${response.main.humidity}%</p>`);
         var windSpeed = $(`<p>Wind Speed: ${response.wind.speed} MPH</p>`);
 
-
         $("#current-weather").addClass("shadow-sm p-3 bg-white rounded mb-3").append(`<h3>${city.toUpperCase()} (${date}) </h3>`).append(iconImg, temp, humidity, windSpeed, getUV(lat, lon));
 
-
     })
-
-
 
 }
 
@@ -90,7 +86,7 @@ function display5DayInfo() {
         var wrapper = $("<div class='wrapper row'>");
 
         for (var i = 0; i < results.length; i++) {
-            if (results[i].dt_txt.indexOf("15:00:00") !== -1) {
+            if (results[i].dt_txt.indexOf("18:00:00") !== -1) {
 
             var forecastDiv = $("<div class='card text-white text-center bg-med-blue-7 mr-3 mb-3 col-md-2 p-2'>");
              
@@ -101,7 +97,7 @@ function display5DayInfo() {
             var iconImage = $("<img>");
             iconImage.attr("src", "https://openweathermap.org/img/wn/" + icon5 + "@2x.png")
 
-            var temp5 = $(`<p id='temp5' class = 'card-text'> Temperature: <br> ${results[i].main.temp_max}</p>`);
+            var temp5 = $(`<p id='temp5' class = 'card-text'> Max Temperature: <br> ${results[i].main.temp_max}</p>`);
 
             var humidity5 = $(`<p id='humidity5' class = 'card-text'> Humidity: ${results[i].main.humidity}%</p>`);
 
@@ -117,6 +113,12 @@ function display5DayInfo() {
 function clearData() {
     $("#current-weather").empty();
     $("#5day").empty();
+}
+
+function error() {
+    window.on("error", function() {
+        $("#current-weather").text("Please enter a valid city");
+    })
 }
 
 //* local storage
