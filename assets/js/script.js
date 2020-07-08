@@ -1,35 +1,6 @@
-//create html info for sidebar 
-// search field #search-input
-// blocks for recently searched items (local storage) div = #recent-searches
-// dynamically create html for information section
-
-
-// main chunk- #display-information
-//#current-weather
-// url : https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
-// My api key: 94b6202e8b8c7902f232bf135edcd567
-//city/date response.name // response.dt (need moment())
-//temperature response.main.temp
-//humidity response.main.humidity
-//wind speed response.wind.speed
-
-// * need these to input to uv index
-// lat response.coord.lat
-// lon response.coord.lon
-// uv index (bkgrnd changes based on index range?)
-//url : https:// http://api.openweathermap.org/data/2.5/uvi?appid={appid}&lat={lat}&lon={lon}
-
-//5 day forecast #5day
-//cards for each day in 5 day forecast:
-//date response.list.dt (need moment())
-//icon for weather conditions (sun, clouds, rain, etc) response.weather[i].icon
-//temp response.list[i].main.temp
-//humidity response.list[i].main.humidity
-
-
 
 //* Variables
-// initial array of recent searches
+
 var searches = [];
 var apiKey = "94b6202e8b8c7902f232bf135edcd567";
 
