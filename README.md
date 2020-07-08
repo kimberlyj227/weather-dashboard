@@ -24,3 +24,7 @@ The user's search history is saved in local storage so they are able to return t
 ### Demonstration
 
 ![Demonstration of Appp](/assets/images/WeatherDashboard.gif)
+
+## Other Details
+
+This application was built using bootstrap and uses an api from open weather map to get weather information.
