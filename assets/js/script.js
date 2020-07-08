@@ -77,8 +77,8 @@ function display5DayInfo() {
     }).then(function (response) {
         var results = response.list;
 
-        $("#5day").append($("<h3 class='row'>5 Day Forecast:</h3>"))
-        var wrapper = $("<div class='wrapper row'>");
+        $("#5day").append($("<h3 class='row p-2'>5 Day Forecast:</h3>"))
+        var wrapper = $("<div class='wrapper row mx-auto'>");
 
         for (var i = 0; i < results.length; i++) {
             if (results[i].dt_txt.indexOf("18:00:00") !== -1) {
