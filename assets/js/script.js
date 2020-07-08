@@ -146,6 +146,10 @@ onLoad();
 // * Click Events
 //search button
 $("#search").on("click", function (event) {
+    if (!$("#search-input").val()) {
+        return false;
+    }
+
     event.preventDefault();
     city = $("#search-input").val().trim();
     clearData();
@@ -164,6 +168,5 @@ $(document).on("click", ".city", function () {
     display5DayInfo();
 
 });
-
 //clear button
 $("#clear").on("click", clearStorage);
