@@ -106,7 +106,6 @@ function display5DayInfo() {
         var wrapper = $("<div class='wrapper row mx-auto'>");
 
         for (var i = 0; i < results.length; i+=8) {
-            if (results[i].dt_txt.indexOf("18:00:00")) {
 
             var forecastDiv = $("<div class='card text-white text-center bg-med-blue-7 mr-3 mb-3 col-md-2 p-2'>");
              
@@ -124,7 +123,7 @@ function display5DayInfo() {
             forecastDiv.append(date5, iconImage, temp5, humidity5);
             wrapper.append(forecastDiv)
             $("#5day").addClass("shadow-sm p-3 bg-white rounded").append(wrapper);
-            }
+        
         }
     })
 }
