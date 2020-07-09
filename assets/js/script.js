@@ -5,6 +5,8 @@ var apiKey = "94b6202e8b8c7902f232bf135edcd567";
 //* Functions
 function onLoad() {
     getSearches();
+    $("#clear").hide();
+    clearData();
 }
 // ** creates recent search buttons
 function renderSearches() {
@@ -27,8 +29,10 @@ function displayCurrentInfo() {
         method: "GET"
     }).then(function (response) {
 
-        var lat = response.coord.lat
-        var lon = response.coord.lon
+        var lat = response.coord.lat;
+        var lon = response.coord.lon;
+        var weather = response.weather[0].main;
+
         var date = moment.unix(response.dt).format("M/D/YY");
         var iconCode = response.weather[0].icon;
         var iconImg = $("<img>");
@@ -38,7 +42,8 @@ function displayCurrentInfo() {
         var humidity = $(`<p>Humidity: ${response.main.humidity}%</p>`);
         var windSpeed = $(`<p>Wind Speed: ${response.wind.speed} MPH</p>`);
 
-        $("#current-weather").addClass("shadow-sm p-3 bg-white rounded mb-3").append(`<h3>${city.toUpperCase()} (${date}) </h3>`).append(iconImg, temp, humidity, windSpeed, getUV(lat, lon));
+        $("#current-weather").append(`<h3>${city.toUpperCase()} (${date}) </h3>`).append(iconImg, temp, humidity, windSpeed, getUV(lat, lon));
+        backgroundPhoto(weather);
 
     })
 
@@ -67,6 +72,24 @@ function getUV(lat, lon) {
 
     })
 }
+// ** populates background image
+function backgroundPhoto(weather) {
+    var background = $("#current-weather").css("background-image", "url('assets/images/default-md.jpg')");
+
+    if(weather === "Clear") {
+        background.css("background-image", "url('assets/images/clear-md.jpg')") 
+    } else if (weather === "Rain" || weather === "Drizzle") {
+        background.css("background-image", "url('assets/images/rain-md.jpg')")
+     } else if (weather === "Thunderstorm") {
+        background.css("background-image", "url('assets/images/storm.-mdjpg')")
+     } else if (weather === "Snow") {
+        background.css("background-image", "url('assets/images/snow-md.jpg')")
+     } else {
+        background.css("background-image", "url('assets/images/clouds-md.jpg')")
+     }
+
+
+}
 // ** gets 5 day forecast information
 function display5DayInfo() {
     var url5Day = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
@@ -80,8 +103,8 @@ function display5DayInfo() {
         $("#5day").append($("<h3 class='row p-2'>5 Day Forecast:</h3>"))
         var wrapper = $("<div class='wrapper row mx-auto'>");
 
-        for (var i = 0; i < results.length; i++) {
-            if (results[i].dt_txt.indexOf("18:00:00") !== -1) {
+        for (var i = 0; i < results.length; i+=8) {
+            if (results[i].dt_txt.indexOf("18:00:00")) {
 
             var forecastDiv = $("<div class='card text-white text-center bg-med-blue-7 mr-3 mb-3 col-md-2 p-2'>");
              
@@ -105,7 +128,7 @@ function display5DayInfo() {
 }
 // ** clears current data so new data can load
 function clearData() {
-    $("#current-weather").empty();
+    $("#current-weather").empty().hide();
     $("#5day").empty();
 }
 //* local storage
@@ -123,6 +146,7 @@ function clearStorage() {
     $("#recent-searches").empty();
     clearData();
     searches = [];
+    $("#clear").hide();
 }
 
 // * Call functions
@@ -144,6 +168,9 @@ $("#search").on("click", function (event) {
     display5DayInfo();
     displayCurrentInfo();
     saveSearches();
+    $("#clear").show();
+    $("#current-weather").show();
+    ("#5day").show();
 })
 //recent search
 $(document).on("click", ".city", function () {
@@ -151,6 +178,7 @@ $(document).on("click", ".city", function () {
     clearData();
     displayCurrentInfo();
     display5DayInfo();
+    $("#current-weather").show();
 
 });
 //clear button
