@@ -5,8 +5,10 @@ var apiKey = "94b6202e8b8c7902f232bf135edcd567";
 //* Functions
 function onLoad() {
     getSearches();
-    $("#clear").hide();
     clearData();
+    if (searches.length <= 0) {
+    $("#clear").hide();
+    }
 }
 // ** creates recent search buttons
 function renderSearches() {
